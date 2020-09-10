@@ -1,0 +1,7 @@
+type: oauth2
+flows:
+  implicit:
+    authorizationUrl: 'http://example.com/api/oauth/dialog'
+    scopes:
+      'read:users': read users info
+      'write:users': modify or remove users

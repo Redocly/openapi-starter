@@ -2,7 +2,7 @@
 
 ## How to use this starter
 
-![](https://user-images.githubusercontent.com/3975738/92927304-12e35d80-f446-11ea-9bd3-a0f8a69792d0.png)
+![Click use template button](https://user-images.githubusercontent.com/3975738/92927304-12e35d80-f446-11ea-9bd3-a0f8a69792d0.png)
 
 ## Working on your OpenAPI Definition
 

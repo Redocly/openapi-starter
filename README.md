@@ -1,4 +1,4 @@
-# acme-api OpenAPI Definition
+# OpenAPI Definition Starter
 
 ## Working on your OpenAPI Definition
 

@@ -9,7 +9,7 @@ properties:
     description: User first name
     type: string
     minLength: 1
-    example: John
+    example: Adam
   lastName:
     description: User last name
     type: string

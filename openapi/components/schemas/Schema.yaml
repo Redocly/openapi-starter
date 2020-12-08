@@ -1,0 +1,12 @@
+type: object
+properties:
+  stringProperty:
+    description: Property name's description (type is string)
+    type: string
+    minLength: 4
+    maxLength: 50
+    example: example
+  numberProperty:
+    description: Property name's description (type is number)
+    type: number
+    example: 8

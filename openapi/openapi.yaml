@@ -33,6 +33,8 @@ paths:
     $ref: paths/echo.yaml
   /pathItem:
     $ref: paths/path-item.yaml
+  /pathItemWithExamples:
+    $ref: paths/path-item-with-examples.yaml
 components:
   securitySchemes:
     main_auth:

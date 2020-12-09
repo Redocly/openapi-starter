@@ -22,11 +22,7 @@ post:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              propertyName:
-                type: string
-                example: example
+            $ref: ../components/schemas/Schema.yaml
   requestBody:
     content:
       application/json:

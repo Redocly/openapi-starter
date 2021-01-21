@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   version: 1.0.0
-  title: Example.com
+  title: Example.com Adam testing
   termsOfService: 'https://example.com/terms/'
   contact:
     email: contact@example.com

@@ -18,9 +18,9 @@ externalDocs:
   url: 'https://github.com/Rebilly/generator-openapi-repo'
 tags:
   - name: Echo
-    description: Example echo operations
+    description: Example echo operations.
   - name: User
-    description: Operations about user
+    description: Operations about users.
   - name: Tag
     description: This is a tag description.
 servers:

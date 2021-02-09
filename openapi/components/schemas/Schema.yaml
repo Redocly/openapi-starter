@@ -42,39 +42,39 @@ properties:
       - instance
       - illustration
   stringDateTime:
-    description: Property name's description (type is string format date-time)
+    description: Property name's description (type is string, format is date-time)
     type: string
     format: date-time
   stringDate:
-    description: Property name's description (type is string format date-time)
+    description: Property name's description (type is string, format is date-time)
     type: string
     format: date
   stringEmail:
-    description: Property name's description (type is string format email)
+    description: Property name's description (type is string, format is email)
     type: string
     format: email
   stringIpAddressV4:
-    description: Property name's description (type is string format ipv4 address)
+    description: Property name's description (type is string, format is ipv4 address)
     type: string
     format: ipv4
   stringIpAddressV6:
-    description: Property name's description (type is string format ipv6 address)
+    description: Property name's description (type is string, format is ipv6 address)
     type: string
     format: ipv6
   stringPassword:
-    description: Property name's description (type is string format password)
+    description: Property name's description (type is string, format is password)
     type: string
     format: password
   stringHostname:
-    description: Property name's description (type is string format hostname)
+    description: Property name's description (type is string, format is hostname)
     type: string
     format: hostname
   stringUri:
-    description: Property name's description (type is string format uri)
+    description: Property name's description (type is string, format is uri)
     type: string
     format: uri
   stringUuid:
-    description: Property name's description (type is string format uuid)
+    description: Property name's description (type is string, format is uuid)
     type: string
     format: uuid
   numberProperty:
@@ -82,11 +82,11 @@ properties:
     type: number
     example: 8
   numberFloat:
-    description: Property name's description (type is number format float)
+    description: Property name's description (type is number, format is float)
     type: number
     format: float
   numberDouble:
-    description: Property name's description (type is number format double)
+    description: Property name's description (type is number, format is double)
     type: number
     format: double
   numberGreaterThanOrEquals:
@@ -133,14 +133,13 @@ properties:
     description: Property name's description (type is integer)
     type: integer
   integer32bit:
-    description: Property name's description (type is integer format int32)
+    description: Property name's description (type is integer, format is int32)
     type: integer
     format: int32
   integer64bit:
-    description: Property name's description (type is integer format int64)
+    description: Property name's description (type is integer, format is int64)
     type: integer
     format: int64
   booleanProperty:
     description: Property name's description (type is boolean)
     type: boolean
-

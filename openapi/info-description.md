@@ -1,4 +1,4 @@
-This is an **example** API to demonstrate features of OpenAPI specification
+This is an **example** API to demonstrate features of the OpenAPI specification.
 
 # Introduction
 
@@ -8,12 +8,12 @@ describing your API in
 [OpenAPI/Swagger
 format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
 
-It also demonstrates features of
+It also demonstrates features of the
 [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool
 and 
 
-[Redoc](https://github.com/Redocly/Redoc) documentation engine. So beyond
-the standard OpenAPI syntax we use a few 
+the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
+the standard OpenAPI syntax, we use a few 
 
 [vendor
 extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).

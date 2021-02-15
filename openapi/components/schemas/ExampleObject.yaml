@@ -16,5 +16,6 @@ properties:
     properties:
       number:
         type: integer
-        description: "Example number value in a container object."
+        nullable: true
+        description: "Example nullable value in a container object."
         example: 22

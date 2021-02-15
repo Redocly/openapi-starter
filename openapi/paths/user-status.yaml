@@ -2,8 +2,9 @@ get:
   tags:
     - Admin
   summary: List users by status
-  description: "This operation lets you list users by their status. Multiple status values can be provided in a single request by using comma-separated strings. Only administrators can use this operation."
+  description: "This operation lets you list users by their status. Multiple status values can be provided in a single request by using comma-separated strings. Only administrators can use this operation.\n \n**This is an example of a deprecated operation.**"
   operationId: userStatus
+  deprecated: true
   parameters:
     - name: status
       in: query

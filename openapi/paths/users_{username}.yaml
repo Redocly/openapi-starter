@@ -17,6 +17,7 @@ get:
     - name: username
       in: path
       description: "The username for which you want to retrieve the data."
+      example: John78
       required: true
       schema:
         type: string
@@ -134,6 +135,7 @@ delete:
     - name: username
       in: path
       description: "The name of the user profile to be **deleted**."
+      example: John78
       required: true
       schema:
         type: string

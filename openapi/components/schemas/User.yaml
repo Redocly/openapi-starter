@@ -5,8 +5,8 @@ required:
 discriminator:
   propertyName: userType
   mapping:
-    admin: ./Admin.yaml
-    basic: ./Basic.yaml
+    admin: './Admin.yaml'
+    basic: './Basic.yaml'
 properties:
   username:
     description: "The username associated with the user profile."
@@ -14,17 +14,17 @@ properties:
     minLength: 4
     maxLength: 32
     pattern: '/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/'
-    example: 'John78'
+    example: John78
   firstName:
     description: "User's first name."
     type: string
     minLength: 1
-    example: 'Bunny'
+    example: Bunny
   lastName:
     description: "User's last name."
     type: string
     minLength: 1
-    example: 'Rabbit'
+    example: Rabbit
   email:
     $ref: './Email.yaml'
   exampleObject:
@@ -36,9 +36,9 @@ properties:
     type: string
     pattern: '/^\+(?:[0-9]-?){6,14}[0-9]$/'
     maxLength: 32
-    example: '+4-0800-555-0110'
+    example: +4-0800-555-0110
   profileUrls:
-    description: "The list of URLs to user's social media profiles. You must provide the URLs with the scheme (`http or `https`)."
+    description: "The list of URLs to user's social media profiles. You must provide the URLs with the scheme (`http` or `https`)."
     type: array
     maxItems: 10
     xml:

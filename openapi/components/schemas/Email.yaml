@@ -1,4 +1,4 @@
 description: "User's email address."
 type: string
-format: test
-example: 'bunny.rabbit@example.com'
+format: email
+example: bunny.rabbit@example.com

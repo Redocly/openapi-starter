@@ -24,17 +24,17 @@ get:
   responses:
     '200':
       description: Successful response example
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '../components/schemas/User.yaml'
-          application/xml:
-            schema:
-              type: array
-              items:
-                $ref: '../components/schemas/User.yaml'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/User.yaml'
+        application/xml:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/User.yaml'
     '400':
       description: Invalid status value was provided in the request
   security:

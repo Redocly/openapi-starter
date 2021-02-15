@@ -23,6 +23,8 @@ post:
   description: This can only be done by an administrator.
   operationId: createUser
   responses:
+    '200':
+      description: Successfully created a user
     '405':
       description: Invalid input
   security:
@@ -30,8 +32,7 @@ post:
         - 'read:users'
         - 'write:users'
   requestBody:
-    User:
-      content:
+    content:
         application/json:
           schema:
             allOf:

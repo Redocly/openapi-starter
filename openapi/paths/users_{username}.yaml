@@ -25,9 +25,9 @@ get:
       schema:
         type: boolean
     - name: userid
-      in: path
+      in: query
       description: ID of the user. This is an example of a deprecated parameter.
-      required: true
+      required: false
       deprecated: true
       schema:
         type: integer
@@ -107,6 +107,8 @@ delete:
       schema:
         type: string
   responses:
+    '200':
+      description: Successfully deleted a user
     '400':
       description: Invalid username provided
     '404':

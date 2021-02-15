@@ -36,8 +36,8 @@ post:
             discriminator:
               propertyName: userType
               mapping:
-                admin: ./Admin.yaml
-                basic: ./Basic.yaml
+                admin: '../components/schemas/Admin.yaml'
+                basic: '../components/schemas/Basic.yaml'
             anyOf:
               - $ref: '../components/schemas/Admin.yaml'
               - $ref: '../components/schemas/Basic.yaml'

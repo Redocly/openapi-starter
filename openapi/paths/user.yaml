@@ -46,5 +46,5 @@ post:
                 name: User
                 type: string
                 description: Example description
-      description: User record to be added to the database
-      required: true
+    description: User record to be added to the database
+    required: true

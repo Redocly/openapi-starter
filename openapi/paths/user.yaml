@@ -43,8 +43,8 @@ post:
           schema:
             type: object
             properties:
-                name: User
-                type: string
-                description: Example description
+                name: 
+                  type: string
+                  description: Example description
     description: User record to be added to the database
     required: true

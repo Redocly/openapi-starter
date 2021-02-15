@@ -1,9 +1,17 @@
 type: object
+required:
+  - username
+discriminator:
+  propertyName: userType
+  mapping:
+    admin: ./Admin.yaml
+    basic: ./Basic.yaml
 properties:
   username:
     description: User supplied username
     type: string
     minLength: 4
+    maxLength: 64
     example: John78
   firstName:
     description: User first name
@@ -17,3 +25,32 @@ properties:
     example: Smith
   email:
     $ref: ./Email.yaml
+  userid:
+    description: ID of the user
+    externalDocs:
+      description: Example of external documentation link
+      url: 'https://example.com'
+    allOf:
+      - $ref: ./UserID.yaml
+  profileUrls:
+    description: The list of URLs to user social media profiles
+    type: array
+    maxItems: 10
+    xml:
+      name: profileUrl
+      wrapped: true
+    items:
+      type: string
+      format: url
+  status:
+    type: string
+    description: Status of the user account
+    enum:
+      - active
+      - banned
+      - inactive
+  userType:
+    description: Type of user account
+    type: string
+xml:
+  name: User

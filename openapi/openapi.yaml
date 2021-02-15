@@ -4,13 +4,15 @@ info:
   title: Example API
   termsOfService: https://example.com/terms/
   contact:
+    name: Contact our support
     email: contact@example.com
     url: http://example.com/contact
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   x-logo:
-    url: https://redocly.github.io/openapi-template/logo.png
+    url: 'https://redocly.github.io/openapi-template/logo.png'
+    altText: OpenAPI example logo
   description: >
     This is an **example** API to demonstrate features of the OpenAPI
     specification.
@@ -45,6 +47,19 @@ tags:
     description: Operations about users.
   - name: Tag
     description: This is a tag description.
+  - name: Admin
+    description: Operations reserved for administrators
+  - name: Info
+    description: Operations that retrieve information
+x-tagGroups:
+  - name: General
+    tags:
+      - User
+      - Info
+      - Echo
+  - name: Administration
+    tags:
+      - Admin
 servers:
   - url: https://{tenant}/api/v1
     variables:
@@ -53,17 +68,22 @@ servers:
         description: Your tenant id
   - url: https://example.com/api/v1
 paths:
-  /users/{username}:
-    $ref: paths/users_{username}.yaml
-  /echo:
-    $ref: paths/echo.yaml
+  '/users/{username}':
+    $ref: 'paths/users@{username}.yaml'
+  '/user':
+    $ref: 'paths/user.yaml'
+  '/user/status':
+    $ref: 'paths/user-status.yaml'
   /pathItem:
     $ref: paths/pathItem.yaml
   /pathItemWithExamples:
     $ref: paths/pathItemWithExamples.yaml
+  '/echo':
+    $ref: 'paths/echo.yaml'
 components:
   securitySchemes:
     main_auth:
+      description: "Example description text of the OAuth2 scheme."
       type: oauth2
       flows:
         implicit:
@@ -72,9 +92,26 @@ components:
             read:users: read users info
             write:users: modify or remove users
     api_key:
+      description: "Example description text of the API key scheme."
       type: apiKey
       in: header
       name: api_key
     basic_auth:
       type: http
       scheme: basic
+x-webhooks:
+  userInfo:
+    post:
+      summary: New user
+      description: Information about a new user in the system
+      operationId: userInfo
+      tags:
+        - Info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'components/schemas/User.yaml'
+      responses:
+        '200':
+          description: "Information about a new user retrieved successfully."

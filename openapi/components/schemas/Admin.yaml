@@ -1,0 +1,19 @@
+description: Example of user with admin permissions
+allOf:
+  - $ref: './User.yaml'
+  - type: object
+    properties:
+      adminDept:
+        type: string
+        description: Department which the admin user controls
+        default: all
+        example: finance
+        enum:
+          - all 
+          - finance
+          - hiring
+          - development
+          - support
+          - contractors
+    required:
+      - adminDept

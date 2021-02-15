@@ -1,7 +1,7 @@
 parameters:
   - name: pretty_print
     in: query
-    description: Pretty print response
+    description: Pretty print response.
     schema:
       type: boolean
 get:
@@ -15,15 +15,23 @@ get:
   parameters:
     - name: username
       in: path
-      description: The name that needs to be fetched
+      description: The name that needs to be fetched.
       required: true
       schema:
         type: string
     - name: with_email
       in: query
-      description: Filter users without email
+      description: Filter users without email.
       schema:
         type: boolean
+    - name: userid
+      in: path
+      description: ID of the user. This is an example of a deprecated parameter.
+      required: true
+      deprecated: true
+      schema:
+        type: integer
+        format: int64
   security:
     - main_auth:
         - read:users
@@ -53,13 +61,13 @@ put:
   parameters:
     - name: username
       in: path
-      description: The name that needs to be updated
+      description: The name that needs to be updated.
       required: true
       schema:
         type: string
   security:
     - main_auth:
-        - write:users
+        - 'write:users'
   requestBody:
     content:
       application/json:
@@ -79,3 +87,32 @@ put:
     '404':
       description: User not found
       $ref: ../components/responses/Problem.yaml
+delete:
+  tags:
+    - Admin
+  summary: Deletes a user
+  description: This can only be done by an administrator.
+  operationId: deleteUser
+  parameters:
+    - name: api_key
+      in: header
+      required: false
+      schema:
+        type: string
+        example: Bearer <TOKEN>
+    - name: username
+      in: path
+      description: Name of the user to delete.
+      required: true
+      schema:
+        type: string
+  responses:
+    '400':
+      description: Invalid username provided
+    '404':
+      description: User not found
+  security:
+    - main_auth:
+        - 'read:users'
+        - 'write:users'
+    - api_key: []

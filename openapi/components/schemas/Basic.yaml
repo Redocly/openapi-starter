@@ -1,0 +1,14 @@
+description: Example of user with basic permissions
+allOf:
+  - $ref: './User.yaml'
+  - type: object
+    properties:
+      permissionId:
+        type: integer
+        format: int32
+        description: Identifier of the permission level the basic user has
+        default: 1
+        minimum: 1
+        maximum: 3
+    required:
+      - permissionId

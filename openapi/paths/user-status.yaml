@@ -1,17 +1,19 @@
 get:
   tags:
     - Admin
-  summary: Find users by status
-  description: "Multiple status values can be provided with comma-separated strings. Only administrators can use this endpoint."
+  summary: List users by status
+  description: "This operation lets you list users by their status. Multiple status values can be provided in a single request by using comma-separated strings. Only administrators can use this operation."
   operationId: userStatus
   parameters:
     - name: status
       in: query
-      description: User status values by which to look up user accounts.
+      description: "One or more user status values by which to look up user accounts."
       required: true
       style: form
+      explode: false
       schema:
         type: array
+        uniqueItems: true
         minItems: 1
         maxItems: 3
         items:
@@ -35,6 +37,10 @@ get:
             type: array
             items:
               $ref: '../components/schemas/User.yaml'
+        text/plain:
+          examples:
+            response:
+              value: Success!
     '400':
       description: Invalid status value was provided in the request
   security:

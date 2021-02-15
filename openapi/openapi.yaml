@@ -40,17 +40,20 @@ info:
     implementation logic. Similar to what
     interfaces have done for lower-level programming, OpenAPI removes the
     guesswork in calling the service.
+externalDocs:
+  description: "Find out how to create a GitHub repo for your OpenAPI definition."
+  url: 'https://github.com/Redocly/create-openapi-repo'
 tags:
   - name: Echo
-    description: Example echo operations.
+    description: "Example echo operations."
   - name: User
-    description: Operations about users.
-  - name: Tag
-    description: This is a tag description.
+    description: "Example actions on user accounts."
   - name: Admin
-    description: Operations reserved for administrators
+    description: "Example operations reserved for administrators."
   - name: Info
-    description: Operations that retrieve information
+    description: "Example operations for retrieving information."
+  - name: Tag
+    description: "This is a tag description."
 x-tagGroups:
   - name: General
     tags:
@@ -72,7 +75,7 @@ paths:
     $ref: 'paths/users@{username}.yaml'
   '/user':
     $ref: 'paths/user.yaml'
-  '/user/status':
+  '/user/list':
     $ref: 'paths/user-status.yaml'
   /pathItem:
     $ref: paths/pathItem.yaml
@@ -89,8 +92,8 @@ components:
         implicit:
           authorizationUrl: http://example.com/api/oauth/dialog
           scopes:
-            read:users: read users info
-            write:users: modify or remove users
+            'read:users': read user info
+            'write:users': modify or remove users
     api_key:
       description: "Example description text of the API key scheme."
       type: apiKey
@@ -102,8 +105,8 @@ components:
 x-webhooks:
   userInfo:
     post:
-      summary: New user
-      description: Information about a new user in the system
+      summary: New user webhook
+      description: "Information about a new user in the system."
       operationId: userInfo
       tags:
         - Info
@@ -114,4 +117,4 @@ x-webhooks:
               $ref: 'components/schemas/User.yaml'
       responses:
         '200':
-          description: "Information about a new user retrieved successfully."
+          description: "Successfully retrieved information about a new user."

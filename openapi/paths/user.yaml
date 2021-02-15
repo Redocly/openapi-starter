@@ -1,17 +1,15 @@
 parameters:
   - name: Accept-Language
     in: header
-    description: >-
-        The language you prefer for messages. Supported values are en-AU,
-        en-CA, en-GB, en-US
+    description: "The language you prefer for messages. Supported values are `en-AU, en-CA, en-GB, en-US`."
     example: en-US
     required: false
     schema:
         type: string
-        default: en-AU
+        default: en-GB
   - name: cookieParam
     in: cookie
-    description: Some cookie
+    description: "Example cookie parameter."
     required: true
     schema:
         type: integer
@@ -20,7 +18,7 @@ post:
   tags:
     - Admin
   summary: Create a new user
-  description: This can only be done by an administrator.
+  description: "This operation creates a new user profile. Only administrators can create user profiles."
   operationId: createUser
   responses:
     '200':
@@ -35,10 +33,14 @@ post:
     content:
         application/json:
           schema:
-            allOf:
-              - description: New user
-                title: UserRecord
-              - $ref: '../components/schemas/User.yaml'
+            discriminator:
+              propertyName: userType
+              mapping:
+                admin: ./Admin.yaml
+                basic: ./Basic.yaml
+            anyOf:
+              - $ref: '../components/schemas/Admin.yaml'
+              - $ref: '../components/schemas/Basic.yaml'
         application/xml:
           schema:
             type: object
@@ -46,5 +48,5 @@ post:
                 name: 
                   type: string
                   description: Example description
-    description: User record to be added to the database
+    description: "User profile to be added to the database."
     required: true

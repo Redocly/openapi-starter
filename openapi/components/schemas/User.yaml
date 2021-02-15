@@ -1,6 +1,7 @@
 type: object
 required:
   - username
+  - status
 discriminator:
   propertyName: userType
   mapping:
@@ -8,32 +9,36 @@ discriminator:
     basic: ./Basic.yaml
 properties:
   username:
-    description: User supplied username
+    description: "The username associated with the user profile."
     type: string
     minLength: 4
-    maxLength: 64
-    example: John78
+    maxLength: 32
+    pattern: '/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/'
+    example: 'John78'
   firstName:
-    description: User first name
+    description: "User's first name."
     type: string
     minLength: 1
-    example: John
+    example: 'Bunny'
   lastName:
-    description: User last name
+    description: "User's last name."
     type: string
     minLength: 1
-    example: Smith
+    example: 'Rabbit'
   email:
-    $ref: ./Email.yaml
-  userid:
-    description: ID of the user
-    externalDocs:
-      description: Example of external documentation link
-      url: 'https://example.com'
+    $ref: './Email.yaml'
+  exampleObject:
+    description: "Example object to show an expanded schema."
     allOf:
-      - $ref: ./UserID.yaml
+      - $ref: './ExampleObject.yaml'
+  phone:
+    description: "User's phone number. Must be provided in international format."
+    type: string
+    pattern: '/^\+(?:[0-9]-?){6,14}[0-9]$/'
+    maxLength: 32
+    example: '+4-0800-555-0110'
   profileUrls:
-    description: The list of URLs to user social media profiles
+    description: "The list of URLs to user's social media profiles. You must provide the URLs with the scheme (`http or `https`)."
     type: array
     maxItems: 10
     xml:
@@ -42,15 +47,26 @@ properties:
     items:
       type: string
       format: url
+    example: ['https://twitter.com/example', 'https://instagram.com/example']
+  recursiveProperty:
+    allOf:
+      - $ref: './User.yaml'
   status:
-    type: string
-    description: Status of the user account
-    enum:
-      - active
-      - banned
-      - inactive
-  userType:
-    description: Type of user account
-    type: string
+    description: "Status of the user account."
+    type: array
+    minItems: 1
+    items:
+      type: string
+      enum:
+        - active
+        - banned
+        - inactive
+  userid:
+    description: "Unique ID of the user."
+    externalDocs:
+      description: Example of external documentation link
+      url: 'https://example.com'
+    allOf:
+      - $ref: './UserID.yaml'
 xml:
   name: User

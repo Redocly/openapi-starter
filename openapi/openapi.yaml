@@ -21,7 +21,11 @@ tags:
   - name: Tag
     description: This is a tag description.
 servers:
-  - url: 'http://example.com/api/v1'
+  - url: 'http://{tenant}.example.com/api/v1'
+    variables:
+      tenant:
+        default: www
+        description: Your tenant id
   - url: 'https://example.com/api/v1'
 paths:
   '/users/{username}':

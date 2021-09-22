@@ -10,7 +10,7 @@ get:
   summary: Get user by user name
   description: |
     Some description of the operation.
-    You can use `markdown` here.
+    You can use `Markdown` here.
   operationId: getUserByName
   parameters:
     - name: username
@@ -40,8 +40,10 @@ get:
             email: user@example.com
     '403':
       description: Forbidden
+      $ref: ../components/responses/Problem.yaml
     '404':
       description: User not found
+      $ref: ../components/responses/Problem.yaml
 put:
   tags:
     - User
@@ -58,13 +60,6 @@ put:
   security:
     - main_auth:
         - 'write:users'
-  responses:
-    '200':
-      description: OK
-    '400':
-      description: Invalid user supplied
-    '404':
-      description: User not found
   requestBody:
     content:
       application/json:
@@ -75,3 +70,12 @@ put:
           $ref: ../components/schemas/User.yaml
     description: Updated user object
     required: true
+  responses:
+    '200':
+      description: OK
+    '400':
+      description: Invalid user supplied
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      description: User not found
+      $ref: ../components/responses/Problem.yaml

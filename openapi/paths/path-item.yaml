@@ -3,11 +3,18 @@ post:
     - Tag
   summary: Operation summary
   description: |
-    Operation description **markdown**.
+    Operation description **Markdown**.
   operationId: operationId
   security:
     - api_key: []
     - basic_auth: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Schema.yaml
+    description: requestBody description
+    required: true
   responses:
     '200':
       description: OK
@@ -23,10 +30,5 @@ post:
         application/json:
           schema:
             $ref: ../components/schemas/Schema.yaml
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: ../components/schemas/Schema.yaml
-    description: requestBody description
-    required: true
+    '400':
+      $ref: ../components/responses/Problem.yaml

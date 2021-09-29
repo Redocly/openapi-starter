@@ -8,21 +8,6 @@ post:
   security:
     - api_key: []
     - basic_auth: []
-  responses:
-    '200':
-      description: OK
-      headers:
-        X-Rate-Limit:
-          description: calls per hour allowed by the user
-          schema:
-            type: integer
-            format: int32
-        X-Expires-After:
-          $ref: ../components/headers/ExpiresAfter.yaml
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Schema.yaml
   requestBody:
     content:
       application/json:
@@ -39,3 +24,20 @@ post:
               stringProperty: checkmark
     description: requestBody description
     required: true
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: calls per hour allowed by the user
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Schema.yaml
+    '400':
+      $ref: ../components/responses/Problem.yaml

@@ -31,6 +31,8 @@ post:
         text/csv:
           schema:
             type: string
+    '400': 
+      description: Unauthorized
   requestBody:
     content:
       application/json:

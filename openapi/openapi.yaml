@@ -13,9 +13,6 @@ info:
     url: 'https://redocly.github.io/openapi-template/logo.png'
   description:
     $ref: ./info-description.md
-externalDocs:
-  description: Find out how to create a GitHub repo for your OpenAPI definition.
-  url: 'https://github.com/Rebilly/generator-openapi-repo'
 tags:
   - name: Echo
     description: Example echo operations.

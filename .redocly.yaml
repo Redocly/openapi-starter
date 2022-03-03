@@ -5,7 +5,7 @@ lint:
   extends:
     - recommended
   rules:
-    no-unused-components: warning
+    no-unused-components: warn
 referenceDocs:
   htmlTemplate: ./docs/index.html
   theme:

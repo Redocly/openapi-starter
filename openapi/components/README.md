@@ -1,5 +1,4 @@
-Reusable components
-===========
+# Reusable components
 
 * You can create the following folders here:
   - `schemas` - reusable [Schema Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#schemaObject)

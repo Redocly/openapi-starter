@@ -1,6 +1,6 @@
 # See https://redoc.ly/docs/cli/configuration/ for more information.
 apis:
-  main@v1: 
+  sample@v1: 
     root: openapi/openapi.yaml
 lint:
   extends:

@@ -1,11 +1,10 @@
-Paths
-=====
+# Paths
 
 Organize your path definitions within this folder.  You will reference your paths from your main `openapi.yaml` entrypoint file.
 
 It may help you to adopt some conventions:
 
-* path separator token (e.g. `@`) or subfolders
+* path separator token (e.g. `_`) or subfolders
 * path parameter (e.g. `{example}`)
 * file-per-path or file-per-operation
 
@@ -18,10 +17,13 @@ You can adopt any organization you wish.  We have some tips for organizing paths
 Use a predefined "path separator" and keep all of your path files in the top level of the `paths` folder.
 
 ```
-# todo: insert tree view of paths folder
+├── echo.yaml
+├── path-item-with-examples.yaml
+├── path-item.yaml
+└── users_{username}.yaml
 ```
 
-Redocly recommends using the `@` character for this case.
+Redocly recommends using the `_` character for this case.
 
 In addition, Redocly recommends placing path parameters within `{}` curly braces if you adopt this style.
 

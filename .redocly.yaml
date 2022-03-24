@@ -1,4 +1,4 @@
-# See https://redoc.ly/docs/cli/configuration/ for more information.
+# See https://redocly.com/docs/cli/configuration/ for more information.
 apis:
   sample@v1: 
     root: openapi/openapi.yaml

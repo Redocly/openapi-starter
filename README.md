@@ -37,7 +37,7 @@ adjust the file/folder organization.
 The `.redocly.yaml` controls settings for various
 tools including the lint tool and the reference
 docs engine.  Open it to find examples and
-[read the docs](https://redoc.ly/docs/cli/configuration/)
+[read the docs](https://redocly.com/docs/cli/configuration/)
 for more information.
 
 
@@ -129,6 +129,8 @@ properties:
 
 ```
 
+If you have an JSON example, you can convert it to JSON schema using Redocly's [JSON to JSON schema tool](https://redocly.com/tools/json-to-json-schema/).
+
 ##### Using the `$ref`
 
 Notice in the complex example above the schema definition itself has `$ref` links to other schemas defined.
@@ -157,16 +159,16 @@ You will use `$ref`s to reference schema from your path definitions.
 #### Adding a Path
 
 1. Navigate to the `openapi/paths` folder.
-2. Add a new YAML file named like your URL endpoint except replacing `/` with `@` and putting path parameters into curly braces like `{example}`.
+2. Add a new YAML file named like your URL endpoint except replacing `/` with `_` (or whichever character you prefer) and putting path parameters into curly braces like `{example}`.
 3. Add the path and a ref to it inside of your `openapi.yaml` file inside of the `openapi` folder.
 
 Example addition to the `openapi.yaml` file:
 ```yaml
 '/customers/{id}':
-  $ref: './paths/customers@{id}.yaml'
+  $ref: './paths/customers_{id}.yaml'
 ```
 
-Here is an example of a YAML file named `customers@{id}.yaml` in the `paths` folder:
+Here is an example of a YAML file named `customers_{id}.yaml` in the `paths` folder:
 
 ```yaml
 get:
@@ -244,6 +246,8 @@ You'll see extensive usage of `$ref`s in this example to different types of comp
 You'll also notice `$ref`s to code samples.
 
 ### Code samples
+
+Automated code sample generations is enabled in the Redocly configuration file. Add manual code samples by the following process:
 
 1. Navigate to the `openapi/code_samples` folder.
 2. Navigate to the `<language>` (e.g. PHP) sub-folder.

@@ -11,4 +11,4 @@ updates:
     schedule:
       interval: "daily"
     allow:
-      - dependency-name: "@redocly/openapi-cli"
+      - dependency-name: "@redocly/cli"

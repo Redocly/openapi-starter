@@ -39,10 +39,10 @@ properties:
     examples:
       - example
   nullableOrStringProperty:
-    description: Property name's description (type is string or null)
+    description: Demo bad type in type list (array)
     type:
       - string
-      - null
+      - foo
     examples:
       - example
   stringEnumValues:

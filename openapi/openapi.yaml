@@ -26,9 +26,6 @@ servers:
       tenant:
         default: www
         description: Your tenant id
-        enum:
-          - 4e6b7b2f-f051-4ddd-8340-d664f1b12777.remockly.com
-          - www
   - url: 'https://example.com/api/v1'
 paths:
   '/users/{username}':

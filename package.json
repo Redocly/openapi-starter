@@ -2,7 +2,7 @@
   "name": "acme-api",
   "version": "1.0.0",
   "dependencies": {
-    "@redocly/cli": "1.0.0-beta.114"
+    "@redocly/cli": "1.0.0-beta.123"
   },
   "private": true,
   "scripts": {

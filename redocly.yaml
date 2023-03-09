@@ -6,16 +6,17 @@ extends:
   - recommended
 rules:
   no-unused-components: error
-features.openapi:
-  htmlTemplate: ./docs/index.html
-  theme:
-    colors:
-      primary:
-        main: "#32329f"
-  generateCodeSamples:
-    languages:  # Array of language config objects; indicates in which languages to generate code samples.
-      - lang: curl
-      - lang: Node.js
-      - lang: JavaScript
-      - lang: PHP
-      - lang: Python
+theme:
+  openapi:
+    htmlTemplate: ./docs/index.html
+    theme:
+      colors:
+        primary:
+          main: "#32329f"
+    generateCodeSamples:
+      languages:  # Array of language config objects; indicates in which languages to generate code samples.
+        - lang: curl
+        - lang: Node.js
+        - lang: JavaScript
+        - lang: PHP
+        - lang: Python

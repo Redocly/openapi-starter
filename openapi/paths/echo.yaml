@@ -31,7 +31,7 @@ post:
         text/csv:
           schema:
             type: string
-    '400': 
+    '400':
       description: Unauthorized
   requestBody:
     content:
@@ -46,9 +46,9 @@ post:
     description: Echo payload
     required: true
   x-codeSamples:
-    - lang: "C#"
+    - lang: C#
       source:
-        $ref: "../code_samples/csharp/echo/post.cs"
+        $ref: ../code_samples/C_sharp/echo/post.cs
     - lang: PHP
       source:
         $ref: ../code_samples/PHP/echo/post.php

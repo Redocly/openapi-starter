@@ -1,3 +1,0 @@
-type: apiKey
-in: header
-name: api_key

@@ -19,7 +19,7 @@ info:
 
     This API definition is intended to to be a good starting point for
     describing your API in [OpenAPI/Swagger
-    format](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md).
+    format](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md).
 
     It also demonstrates features of the
     [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool

@@ -71,35 +71,6 @@ put:
   security:
     - main_auth:
         - 'write:users'
-  responses:
-    '200':
-      description: Successfully updated the user profile
-      content:
-        application/json:
-          example:
-            status: 200
-            message: OK
-    '400':
-      description: Invalid username supplied
-      content:
-        application/json:
-          example:
-            status: 400
-            message: Invalid username
-    '404':
-      description: User not found
-      content:
-        application/json:
-          example:
-            status: 404
-            message: Not found
-    '405':
-      description: Method not allowed
-      content:
-        application/json:
-          example:
-            status: 405
-            message: Not allowed
   requestBody:
     content:
       application/json:
@@ -112,13 +83,25 @@ put:
     required: true
   responses:
     '200':
-      description: OK
+      description: Successfully updated the user profile
+      content:
+        application/json:
+          example:
+            status: 200
+            message: OK
     '400':
-      description: Invalid user supplied
+      description: Invalid username supplied
       $ref: ../components/responses/Problem.yaml
     '404':
       description: User not found
       $ref: ../components/responses/Problem.yaml
+    '405':
+      description: Method not allowed
+      content:
+        application/json:
+          example:
+            status: 405
+            message: Not allowed
 delete:
   tags:
     - Admin

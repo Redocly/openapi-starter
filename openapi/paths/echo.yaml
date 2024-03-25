@@ -51,7 +51,7 @@ post:
   x-codeSamples:
     - lang: C#
       source:
-        $ref: '../code_samples/csharp/echo/post.cs'
+        $ref: '../code_samples/C_sharp/echo/post.cs'
     - lang: PHP
       source:
         $ref: '../code_samples/PHP/echo/post.php'

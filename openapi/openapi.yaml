@@ -4,13 +4,15 @@ info:
   title: Example API
   termsOfService: https://example.com/terms/
   contact:
+    name: Contact our support
     email: contact@example.com
     url: http://example.com/contact
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   x-logo:
-    url: https://redocly.github.io/openapi-template/logo.png
+    url: 'https://redocly.github.io/openapi-template/logo.png'
+    altText: OpenAPI example logo
   description: >
     This is an **example** API to demonstrate features of the OpenAPI
     specification.
@@ -38,13 +40,29 @@ info:
     implementation logic. Similar to what
     interfaces have done for lower-level programming, OpenAPI removes the
     guesswork in calling the service.
+externalDocs:
+  description: "Find out how to create a GitHub repo for your OpenAPI definition."
+  url: 'https://github.com/Redocly/create-openapi-repo'
 tags:
   - name: Echo
-    description: Example echo operations.
+    description: "Example echo operations."
   - name: User
-    description: Operations about users.
+    description: "Example actions on user accounts."
+  - name: Admin
+    description: "Example operations reserved for administrators."
+  - name: Info
+    description: "Example operations for retrieving information."
   - name: Tag
-    description: This is a tag description.
+    description: "This is a tag description."
+x-tagGroups:
+  - name: General
+    tags:
+      - User
+      - Info
+      - Echo
+  - name: Administration
+    tags:
+      - Admin
 servers:
   - url: https://{tenant}/api/v1
     variables:
@@ -53,28 +71,52 @@ servers:
         description: Your tenant id
   - url: https://example.com/api/v1
 paths:
-  /users/{username}:
-    $ref: paths/users_{username}.yaml
-  /echo:
-    $ref: paths/echo.yaml
+  '/users/{username}':
+    $ref: 'paths/users_{username}.yaml'
+  '/user':
+    $ref: 'paths/user.yaml'
+  '/user/list':
+    $ref: 'paths/user-status.yaml'
   /pathItem:
     $ref: paths/pathItem.yaml
   /pathItemWithExamples:
     $ref: paths/pathItemWithExamples.yaml
+  '/echo':
+    $ref: 'paths/echo.yaml'
 components:
   securitySchemes:
     main_auth:
+      description: "Example description text of the OAuth2 scheme."
       type: oauth2
       flows:
         implicit:
           authorizationUrl: http://example.com/api/oauth/dialog
           scopes:
-            read:users: read users info
-            write:users: modify or remove users
+            'read:users': read user info
+            'write:users': modify or remove users
     api_key:
+      description: "Example description text of the API key scheme."
       type: apiKey
       in: header
       name: api_key
     basic_auth:
       type: http
       scheme: basic
+webhooks:
+  userInfo:
+    post:
+      summary: New user webhook
+      description: "Information about a new user in the system."
+      operationId: userInfo
+      tags:
+        - Info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'components/schemas/User.yaml'
+      responses:
+        '200':
+          description: "Successfully retrieved information about a new user."
+      security:
+        - api_key: []

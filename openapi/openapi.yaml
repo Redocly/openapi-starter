@@ -102,7 +102,7 @@ components:
     basic_auth:
       type: http
       scheme: basic
-x-webhooks:
+webhooks:
   userInfo:
     post:
       summary: New user webhook
@@ -118,3 +118,5 @@ x-webhooks:
       responses:
         '200':
           description: "Successfully retrieved information about a new user."
+      security:
+        - api_key: []

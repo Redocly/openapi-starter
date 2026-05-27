@@ -16,9 +16,6 @@
 #### `npm start`
 Starts the reference docs preview server.
 
-#### `npm run build`
-Bundles the definition to the dist folder.
-
 #### `npm test`
 Validates the definition.
 

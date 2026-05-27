@@ -14,7 +14,6 @@ properties:
     minLength: 4
     maxLength: 32
     pattern: '/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/'
-    example: John78
   firstName:
     description: "User's first name."
     type: string
@@ -36,7 +35,6 @@ properties:
     type: string
     pattern: '/^\+(?:[0-9]-?){6,14}[0-9]$/'
     maxLength: 32
-    example: +4-0800-555-0110
   profileUrls:
     description: "The list of URLs to user's social media profiles. You must provide the URLs with the scheme (`http` or `https`)."
     type: array

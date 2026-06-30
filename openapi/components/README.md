@@ -2,7 +2,8 @@
 
 Reusable [Component Objects](https://spec.openapis.org/oas/v3.1.0.html#components-object)
 live here, one per file, and are pulled into paths and schemas with `$ref`.
-Each subfolder maps to a component type. You can add component-type folders as you need them:
+Each subfolder maps to a component type.
+You can add component-type folders as you need them:
 
 * `schemas` - reusable [Schema Objects](https://spec.openapis.org/oas/v3.1.0.html#schema-object)
 * `parameters` - reusable [Parameter Objects](https://spec.openapis.org/oas/v3.1.0.html#parameter-object)

@@ -1,6 +1,7 @@
 # Paths
 
-Organize your path definitions within this folder. Reference each path from the root `openapi.yaml`:
+Organize your path definitions within this folder.
+Reference each path from the root `openapi.yaml`:
 
 ```yaml
 paths:
@@ -18,7 +19,8 @@ It may help you to adopt some conventions:
 
 There are different benefits and drawbacks to each decision.
 
-You can adopt any organization you wish. We have some tips for organizing paths based on common practices.
+You can adopt any organization you wish.
+We have some tips for organizing paths based on common practices.
 
 ## Each path in a separate file
 
@@ -52,7 +54,8 @@ You may also place each operation in a separate file.
 
 ### Files at top-level of `paths`
 
-You may name your files with some concatenation for the HTTP method. For example, following a convention such as: `<path with allowed separator>-<http-method>.yaml`.
+You may name your files with some concatenation for the HTTP method.
+For example, following a convention such as: `<path with allowed separator>-<http-method>.yaml`.
 
 #### Motivations
 
@@ -92,7 +95,8 @@ paths:
 
 #### Drawbacks
 
-If you have a lot of nested folders, it may be confusing to reference your schemas. For example, from `paths/menu/{menuItemId}.yaml` you need two levels of `../` to reach components:
+If you have many nested folders, it may be confusing to reference your schemas.
+For example, from `paths/menu/{menuItemId}.yaml` you need two levels of `../` to reach components:
 
 ```yaml
 responses:

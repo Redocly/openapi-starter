@@ -35,7 +35,7 @@ post:
   summary: Create order
   description: |
     Create a new order.
-    Order items cannot be changed - if they need to be updated, the order should be canceled and a new one placed.
+    Order items cannot be changed - if they need to be updated, cancel the order and place a new one.
   operationId: createOrder
   security:
     - OAuth2:

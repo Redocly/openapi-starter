@@ -1,5 +1,7 @@
 # OpenAPI Definition Starter
 
+A starter for multi-file API definitions managed with the [Redocly CLI](https://redocly.com/docs/cli/). The bundled example is the [**Redocly Cafe** demo API](https://cafe.redocly.com/openapi/cafe).
+
 ## How to use this starter
 
 ![Click use template button](https://user-images.githubusercontent.com/3975738/92927304-12e35d80-f446-11ea-9bd3-a0f8a69792d0.png)
@@ -31,7 +33,7 @@ good place to start.
 Update this contribution guide if you
 adjust the file/folder organization.
 
-The `.redocly.yaml` controls settings for various
+The `redocly.yaml` controls settings for various
 tools including the lint tool and the reference
 docs engine.  Open it to find examples and
 [read the docs](https://redocly.com/docs/cli/configuration/)
@@ -51,79 +53,32 @@ for more information.
 This is a very simple schema example:
 ```yaml
 type: string
-description: The resource ID. Defaults to UUID v4
-maxLength: 50
-example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
+description: Menu item ID. Unique identifier prefixed with `prd_`.
+pattern: ^prd_[0-9abcdefghjkmnpqrstvwxyz]{26}$
+example: prd_01h1s5z6vf2mm1mz3hevnn9va7
 ```
-This is a more complex schema example:
+This is a more complex schema example. It uses `allOf` to compose a
+`Beverage` from its own properties plus a shared `MenuBaseItem` schema:
 ```yaml
-type: object
-properties:
-  id:
-    description: The customer identifier string
-    readOnly: true
-    allOf:
-      - $ref: ./ResourceId.yaml
-  websiteId:
-    description: The website's ID
-    allOf:
-      - $ref: ./ResourceId.yaml
-  paymentToken:
-    type: string
-    writeOnly: true
-    description: |
-      A write-only payment token; if supplied, it will be converted into a
-      payment instrument and be set as the `defaultPaymentInstrument`. The
-      value of this property will override the `defaultPaymentInstrument`
-      in the case that both are supplied. The token may only be used once
-      before it is expired.
-  defaultPaymentInstrument:
-    $ref: ./PaymentInstrument.yaml
-  createdTime:
-    description: The customer created time
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
-  updatedTime:
-    description: The customer updated time
-    allOf:
-      - $ref: ./ServerTimestamp.yaml
-  tags:
-    description: A list of customer's tags
-    readOnly: true
-    type: array
-    items:
-      $ref: ./Tags/Tag.yaml
-  revision:
-    description: >
-      The number of times the customer data has been modified.
-
-      The revision is useful when analyzing webhook data to determine if the
-      change takes precedence over the current representation.
-    type: integer
-    readOnly: true
-  _links:
-    type: array
-    description: The links related to resource
-    readOnly: true
-    minItems: 3
-    items:
-      anyOf:
-        - $ref: ./Links/SelfLink.yaml
-        - $ref: ./Links/NotesLink.yaml
-        - $ref: ./Links/DefaultPaymentInstrumentLink.yaml
-        - $ref: ./Links/LeadSourceLink.yaml
-        - $ref: ./Links/WebsiteLink.yaml
-  _embedded:
-    type: array
-    description: >-
-      Any embedded objects available that are requested by the `expand`
-      querystring parameter.
-    readOnly: true
-    minItems: 1
-    items:
-      anyOf:
-        - $ref: ./Embeds/LeadSourceEmbed.yaml
-
+allOf:
+  - type: object
+    properties:
+      category:
+        description: Menu item category.
+        type: string
+        const: beverage
+      volume:
+        type: number
+        description: Size of the beverage in milliliters.
+        exclusiveMinimum: 0
+      containsCaffeine:
+        type: boolean
+        description: Indicates if the beverage contains caffeine.
+    required:
+      - category
+      - volume
+      - containsCaffeine
+  - $ref: ./MenuBaseItem.yaml
 ```
 
 If you have an JSON example, you can convert it to JSON schema using Redocly's [JSON to JSON schema tool](https://redocly.com/tools/json-to-json-schema/).
@@ -135,8 +90,8 @@ Notice in the complex example above the schema definition itself has `$ref` link
 Here is a small excerpt with an example:
 
 ```yaml
-defaultPaymentInstrument:
-  $ref: ./PaymentInstrument.yaml
+page:
+  $ref: ./Page.yaml
 ```
 
 The value of the `$ref` is the path to the other schema definition.
@@ -161,94 +116,66 @@ You will use `$ref`s to reference schema from your path definitions.
 
 Example addition to the `openapi.yaml` file:
 ```yaml
-'/customers/{id}':
-  $ref: './paths/customers_{id}.yaml'
+'/menu/{menuItemId}':
+  $ref: './paths/menu_{menuItemId}.yaml'
 ```
 
-Here is an example of a YAML file named `customers_{id}.yaml` in the `paths` folder:
+Here is an example of a YAML file named `menu_{menuItemId}.yaml` in the `paths` folder:
 
 ```yaml
-get:
+parameters:
+  - $ref: ../components/parameters/MenuItemId.yaml
+delete:
   tags:
-    - Customers
-  summary: Retrieve a list of customers
-  operationId: GetCustomerCollection
-  description: |
-    You can have a markdown description here.
-  parameters:
-    - $ref: ../components/parameters/collectionLimit.yaml
-    - $ref: ../components/parameters/collectionOffset.yaml
-    - $ref: ../components/parameters/collectionFilter.yaml
-    - $ref: ../components/parameters/collectionQuery.yaml
-    - $ref: ../components/parameters/collectionExpand.yaml
-    - $ref: ../components/parameters/collectionFields.yaml
+    - Products
+  summary: Delete a menu item
+  description: Delete an existing menu item.
+  operationId: deleteMenuItem
+  security:
+    - OAuth2:
+        - menu:write
   responses:
-    '200':
-      description: A list of Customers was retrieved successfully
-      headers:
-        Rate-Limit-Limit:
-          $ref: ../components/headers/Rate-Limit-Limit.yaml
-        Rate-Limit-Remaining:
-          $ref: ../components/headers/Rate-Limit-Remaining.yaml
-        Rate-Limit-Reset:
-          $ref: ../components/headers/Rate-Limit-Reset.yaml
-        Pagination-Total:
-          $ref: ../components/headers/Pagination-Total.yaml
-        Pagination-Limit:
-          $ref: ../components/headers/Pagination-Limit.yaml
-        Pagination-Offset:
-          $ref: ../components/headers/Pagination-Offset.yaml
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Customer.yaml
-        text/csv:
-          schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Customer.yaml
+    '204':
+      description: Menu item deleted successfully.
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
     '401':
-      $ref: ../components/responses/AccessForbidden.yaml
-  x-code-samples:
-    - lang: PHP
-      source:
-        $ref: ../code_samples/PHP/customers/get.php
-post:
-  tags:
-    - Customers
-  summary: Create a customer (without an ID)
-  operationId: PostCustomer
-  description: Another markdown description here.
-  requestBody:
-    $ref: ../components/requestBodies/Customer.yaml
-  responses:
-    '201':
-      $ref: ../components/responses/Customer.yaml
-    '401':
-      $ref: ../components/responses/AccessForbidden.yaml
-    '409':
-      $ref: ../components/responses/Conflict.yaml
-    '422':
-      $ref: ../components/responses/InvalidDataError.yaml
-  x-code-samples:
-    - lang: PHP
-      source:
-        $ref: ../code_samples/PHP/customers/post.php
+      $ref: ../components/responses/Unauthorized.yaml
+    '403':
+      $ref: ../components/responses/Forbidden.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
 ```
 
-You'll see extensive usage of `$ref`s in this example to different types of components including schemas.
-
-You'll also notice `$ref`s to code samples.
+The top-level `parameters` list is shared across all HTTP methods in the file. You'll also see `$ref`s to reusable parameters and responses.
 
 ### Code samples
 
-Automated code sample generations is enabled in the Redocly configuration file. Add manual code samples by the following process:
+Automated code sample generation is enabled in the `redocly.yaml` configuration
+file (`curl`, `Node.js`, `JavaScript`, `PHP`, and `Python`). Use the manual
+`x-codeSamples` extension to add samples for languages the generator doesn't
+cover (for example, C#) or to override a generated sample. To add one:
 
 1. Navigate to the `openapi/code_samples` folder.
-2. Navigate to the `<language>` (e.g. PHP) sub-folder.
-3. Navigate to the `path` folder, and add ref to the code sample.
+2. Navigate to the `<language>` sub-folder, then a `<path>` folder.
+   The convention is `<language>/<path>/<HTTP verb>.<extension>`, where `<path>`
+   replaces each `/` with `_`. For example, `GET /menu` lives at
+   `C_sharp/menu/get.cs`.
+3. Add the file, then reference it from the operation with `x-codeSamples`:
+
+```yaml
+x-codeSamples:
+  - lang: C#
+    label: C#
+    source:
+      $ref: ../code_samples/C_sharp/menu/get.cs
+  - lang: PHP
+    label: PHP
+    source:
+      $ref: ../code_samples/PHP/menu/get.php
+```
 
 You can add languages by adding new folders at the appropriate path level.
 

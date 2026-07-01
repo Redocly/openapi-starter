@@ -15,7 +15,7 @@ properties:
     description: |-
       Use with the `before` query parameter to load the previous page of data.
       When `null`, there is no data.
-      The cursor is opaque and internal structure is subject to change.
+      The cursor is opaque and the internal structure is subject to change.
   hasNextPage:
     type: boolean
     description: Indicates if there is a next page with items.

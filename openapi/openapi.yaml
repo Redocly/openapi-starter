@@ -1,122 +1,74 @@
 openapi: 3.1.0
 info:
+  title: Redocly Cafe
+  description: |
+    Demo API for cafe operators (not customers) to manage menus, orders, and revenue.
+    Create API credentials and try it yourself in a realistic OpenAPI workflow.
   version: 1.0.0
-  title: Example API
-  termsOfService: https://example.com/terms/
   contact:
-    name: Contact our support
-    email: contact@example.com
-    url: http://example.com/contact
+    email: team@redocly.com
+    url: https://redocly.com/contact-us/
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  x-logo:
-    url: 'https://redocly.github.io/openapi-template/logo.png'
-    altText: OpenAPI example logo
-  description: >
-    This is an **example** API to demonstrate features of the OpenAPI
-    specification.
-
-    # Introduction
-
-    This API definition is intended to to be a good starting point for
-    describing your API in [OpenAPI/Swagger
-    format](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md).
-
-    It also demonstrates features of the
-    [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool
-    and the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
-    the standard OpenAPI syntax, we use a few 
-    [vendor extensions](https://github.com/Redocly/Redoc/blob/main/docs/redoc-vendor-extensions.md).
-
-    # OpenAPI Specification
-
-    The goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which
-    allows both humans and computers to discover and understand the capabilities
-    of the service without access to source
-    code, documentation, or through network traffic inspection. When properly
-    defined via OpenAPI, a consumer can 
-    understand and interact with the remote service with a minimal amount of
-    implementation logic. Similar to what
-    interfaces have done for lower-level programming, OpenAPI removes the
-    guesswork in calling the service.
-externalDocs:
-  description: "Find out how to create a GitHub repo for your OpenAPI definition."
-  url: 'https://github.com/Redocly/create-openapi-repo'
-tags:
-  - name: Echo
-    description: "Example echo operations."
-  - name: User
-    description: "Example actions on user accounts."
-  - name: Admin
-    description: "Example operations reserved for administrators."
-  - name: Info
-    description: "Example operations for retrieving information."
-  - name: Tag
-    description: "This is a tag description."
-x-tagGroups:
-  - name: General
-    tags:
-      - User
-      - Info
-      - Echo
-  - name: Administration
-    tags:
-      - Admin
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://redocly.com/subscription-agreement
 servers:
-  - url: https://{tenant}/api/v1
-    variables:
-      tenant:
-        default: www
-        description: Your tenant id
-  - url: https://example.com/api/v1
+  - url: https://api.cafe.redocly.com
+    description: Live server.
+tags:
+  - name: Authorization
+    description: Create a client to demo the API.
+  - name: Products
+    description: Operations related to products.
+  - name: Orders
+    description: Order management operations.
+  - name: Statistics
+    description: Statistics operations.
 paths:
-  '/users/{username}':
-    $ref: 'paths/users_{username}.yaml'
-  '/user':
-    $ref: 'paths/user.yaml'
-  '/user/list':
-    $ref: 'paths/user-status.yaml'
-  /pathItem:
-    $ref: paths/pathItem.yaml
-  /pathItemWithExamples:
-    $ref: paths/pathItemWithExamples.yaml
-  '/echo':
-    $ref: 'paths/echo.yaml'
+  /menu:
+    $ref: paths/menu.yaml
+  /menu/{menuItemId}:
+    $ref: paths/menu_{menuItemId}.yaml
+  /menu-item-images/{menuItemId}:
+    $ref: paths/menu-item-images_{menuItemId}.yaml
+  /orders:
+    $ref: paths/orders.yaml
+  /orders/{orderId}:
+    $ref: paths/orders_{orderId}.yaml
+  /order-items:
+    $ref: paths/order-items.yaml
+  /revenue:
+    $ref: paths/revenue.yaml
+  /oauth2/register:
+    $ref: paths/oauth2_register.yaml
+webhooks:
+  order-notification:
+    $ref: webhooks/order-notification.yaml
 components:
   securitySchemes:
-    main_auth:
-      description: "Example description text of the OAuth2 scheme."
+    OAuth2:
       type: oauth2
+      description: OAuth2 authorization for API access.
       flows:
-        implicit:
-          authorizationUrl: http://example.com/api/oauth/dialog
+        authorizationCode:
+          authorizationUrl: https://api.cafe.redocly.com/oauth2/authorize
+          tokenUrl: https://api.cafe.redocly.com/oauth2/token
           scopes:
-            'read:users': read user info
-            'write:users': modify or remove users
-    api_key:
-      description: "Example description text of the API key scheme."
+            menu:read: Read access to menu items and images
+            menu:write: Write access to menu items (create, delete)
+            orders:read: Read access to orders
+            orders:write: Write access to orders (create, update, delete)
+            revenue:read: Read access to revenue statistics
+        clientCredentials:
+          tokenUrl: https://api.cafe.redocly.com/oauth2/token
+          scopes:
+            menu:read: Read access to menu items and images
+            menu:write: Write access to menu items (create, delete)
+            orders:read: Read access to orders
+            orders:write: Write access to orders (create, update, delete)
+            revenue:read: Read access to revenue statistics
+    ApiKey:
       type: apiKey
+      name: X-API-Key
       in: header
-      name: api_key
-    basic_auth:
-      type: http
-      scheme: basic
-webhooks:
-  userInfo:
-    post:
-      summary: New user webhook
-      description: "Information about a new user in the system."
-      operationId: userInfo
-      tags:
-        - Info
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: 'components/schemas/User.yaml'
-      responses:
-        '200':
-          description: "Successfully retrieved information about a new user."
-      security:
-        - api_key: []
+      description: API key for internal operations.

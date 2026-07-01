@@ -1,0 +1,21 @@
+name: filter
+description: |-
+  Filters the collection items using space-separated `field:value` pairs.
+
+  **Format:** `field1:value1 field2:value2`
+
+  **Supported operators:**
+  - `field:value` - exact match
+  - `field:value1,value2` - match any of the comma-separated values (OR)
+  - Time ranges: use `30d` (30 days), `7d` (7 days), `1h` (1 hour), etc.
+
+  **Examples:**
+  - `status:placed` - filter by single status
+  - `status:placed,completed` - filter by multiple statuses
+  - `createdAt:30d` - filter orders created in the last 30 days
+  - `orderId:ord_01h1s5z6vf2mm1mz3hevnn9va7` - filter by specific order ID
+  - `status:placed createdAt:7d` - combine multiple filters
+in: query
+required: false
+schema:
+  type: string
